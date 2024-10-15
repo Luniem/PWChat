@@ -1,10 +1,10 @@
-# PWChat
+# PWChat 💬
 
 The PWChat is a small chat-application in order to get to play around with progressive web-apps. The focus is mainly on the development of the behaviour as PWA instead of the chat-application itself.
 
 The backend for this chat-application was already provided and is quite simple.
 
-## Frontend (Plain HTML + CSS + JS)
+## Frontend (Plain HTML + CSS + JS) 🤮
 
 The frontend should be implemented by basic webtechnology and no frameworks are allowed.
 
@@ -30,7 +30,7 @@ For the progressive web-app part following aspect are most important:
 
 Not part of the implementation needs to be login and registration, writing messages when offline, updating displayed messages when new one is sent and starting a new conversation.
 
-## Backend (Express)
+## Backend (Express) 😮‍💨
 
 The given backend delivers following endpoints:
 
