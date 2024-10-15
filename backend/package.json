@@ -1,0 +1,15 @@
+{
+    "name": "pwchat-backend",
+    "version": "1.0.0",
+    "description": "",
+    "license": "ISC",
+    "author": "",
+    "main": "index.js",
+    "scripts": {
+        "start": "node index.js"
+    },
+    "dependencies": {
+        "express": "^4.21.0"
+    },
+    "devDependencies": {}
+}
