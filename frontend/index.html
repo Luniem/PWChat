@@ -2,9 +2,27 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>Chat PWA</title>
+    <title>PWChat</title>
+    <link rel="stylesheet" href="variables.css">
+    <link rel="stylesheet" href="styles.css">
   </head>
   <body>
-    Hello World!
+    <div id="content">
+        <nav>
+            <button id="chat-button" class="on-background">Chat</button>
+            <button id="user-button" class="on-background-active">Users</button>
+        </nav>
+        <main>
+            <h5> This is the main!</h5>
+        </main>
+    </div>
   </body>
+  <script defer>
+    const nav = document.getElementsByTagName("nav")[0];
+    const chatButton = document.getElementById("chat-button");
+
+    chatButton.addEventListener('click', () => {
+        nav.classList.toggle("reduced")
+    })
+</script>
 </html>

@@ -1,0 +1,9 @@
+html {
+    --nav-width: 150px;
+    --nav-reduced-width: 50px;
+    --sizing-sm: 6px;
+    --sizing-md: 12px;
+    --surface-background: #2D2D2D;
+    --on-background: rgba(255,255,255,0.7);
+    --on-background-active: rgba(255,255,255,0.95);
+}
