@@ -23,6 +23,7 @@ nav {
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding: var(--sizing-sm);
     width: var(--nav-width);
     transition: width 250ms ease-out
 }
@@ -39,6 +40,7 @@ main {
     background-color: #ebebeb;
     width: 100%;
     margin: var(--sizing-md);
+    margin-left: 0;
     border-radius: 6px;
 }
 
@@ -51,8 +53,20 @@ main {
 }
 
 button {
+    border-radius: 4px;
+    width: 100%;
+    padding: var(--sizing-md);
+    height: 24px;
     background-color: transparent;
     border: none;
+}
+
+button.active {
+    background-color: #86CFFD26;
+}
+
+button:hover {
+    background-color: 
 }
 
 @font-face {

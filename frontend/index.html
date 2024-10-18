@@ -5,24 +5,17 @@
     <title>PWChat</title>
     <link rel="stylesheet" href="variables.css">
     <link rel="stylesheet" href="styles.css">
+    <script src="main.js" defer></script>
   </head>
   <body>
     <div id="content">
         <nav>
-            <button id="chat-button" class="on-background">Chat</button>
-            <button id="user-button" class="on-background-active">Users</button>
+            <button id="chat-button" class="on-background-active active">Chat</button>
+            <button id="user-button" class="on-background">Users</button>
         </nav>
         <main>
-            <h5> This is the main!</h5>
+            <p> This is the main!</p>
         </main>
     </div>
   </body>
-  <script defer>
-    const nav = document.getElementsByTagName("nav")[0];
-    const chatButton = document.getElementById("chat-button");
-
-    chatButton.addEventListener('click', () => {
-        nav.classList.toggle("reduced")
-    })
-</script>
 </html>
