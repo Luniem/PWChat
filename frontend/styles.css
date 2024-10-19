@@ -48,7 +48,7 @@ main {
     color: var(--on-background);
 }
 
-.on-background-active {
+.on-background.active {
     color: var(--on-background-active);
 }
 
