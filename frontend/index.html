@@ -27,19 +27,17 @@
                 </div>
             </div>
             <div id="message-area">
-                <!-- <div id="no-convo-selected">
+                <div id="no-convo-selected">
                     <h3>Momentan ist keine Konversation ausgewählt!</h3>
-                </div> -->
-                <div id="selected-convo-area">
+                </div>
+                <div id="selected-convo-area" class="hidden">
                     <div class="convo-header">
                         <img src="images/daniel.jpg"/>
                         <h4> Daniel</h4>
                     </div>
                     <div class="message-content">
                         <div id="message-list">
-                            <div class="message-box">
-                                <span>Test</span>
-                            </div>
+
                         </div>
                         <div class="convo-footer">
                             <input id="message-input" type="text" />
@@ -59,6 +57,12 @@
                 <h4></h4>
                 <span></span>
             </div>
+        </div>
+    </template>
+
+    <template id="message-template">
+        <div class="message-box">
+            <span></span>
         </div>
     </template>
   </body>

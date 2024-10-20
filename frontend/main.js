@@ -7,6 +7,15 @@ const settingButton = document.getElementById("setting-button");
 const convoList = document.getElementById("convo-list");
 const convoTemplate = document.getElementById("convo-template");
 
+const selectedConvoArea = document.getElementById("selected-convo-area");
+const noConvoSelected = document.getElementById("no-convo-selected");
+
+const messageList = document.getElementById("message-list");
+const messageTemplate = document.getElementById("message-template");
+const headerImg = document.getElementsByClassName("convo-header")[0].querySelector("img");
+const headerName = document.getElementsByClassName("convo-header")[0].querySelector("h4");
+
+
 let selectedChat;
 const currentUser = "daniel";
 
@@ -84,11 +93,47 @@ function selectChat(id) {
 }
 
 function refreshMessageWindow() {
-    fetch("http://localhost:5000/conversations/" + selectedChat + "/messages").then((response) => {
-        response.json().then((messages) => {
-            console.log(messages);
+    if (selectedChat === undefined) {
+        selectedConvoArea.classList.add("hidden");
+        noConvoSelected.classList.remove("hidden")
+    } else {
+        selectedConvoArea.classList.remove("hidden");
+        noConvoSelected.classList.add("hidden")
+
+        messageList.innerHTML = "";
+        
+        fetch("http://localhost:5000/conversations/" + selectedChat + "/messages").then((response) => {
+            response.json().then((messages) => {
+                messages.forEach((message) => {
+                    console.log(messages);
+                    // get box from template
+                    const messageBox = messageTemplate.content.querySelector("div");
+                    
+                    // copy template box
+                    const copy = document.importNode(messageBox, true);
+                    
+                    // get elements in box
+                    const span = copy.querySelector("span");
+                    
+                    // fill with content
+                    span.innerText = message.message;
+                    
+                    if(message.from === currentUser) {
+                        copy.classList.add("own-message");
+                    } else {
+                        copy.classList.add("partner-message");
+                    }
+                    
+                    // set header
+                    headerImg.src = "images/" + message.from + ".jpg";
+                    headerName.innerText = message.from;
+
+                    // add to DOM
+                    messageList.append(copy);
+                })
+            })
         })
-    })
+    }
 }
 
 function activateButton(button) {

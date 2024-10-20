@@ -83,7 +83,7 @@ main {
     border-radius: 50%;
 }
 
-#conversation-area > div > .convo > div > h4 {
+#conversation-area > div > .convo > div > h4, .convo-header > h4 {
     text-transform: capitalize;
 }
 
@@ -181,10 +181,6 @@ button.active {
     box-sizing: border-box;
 }
 
-#message-area > #selected-convo-area > #message-list {
-    height: 100%;
-}
-
 #message-area > #selected-convo-area > .convo-header > img {
     height: 100%;
     border-radius: 50%;
@@ -233,6 +229,36 @@ button.active {
     background-color: var(--primary);
     border-radius: 10px;
     color: white;
+}
+
+#message-area > #selected-convo-area > .message-content > #message-list {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    gap: 10px;
+    overflow: hidden;
+}
+
+#message-list > .message-box {
+    display: flex;
+    padding: var(--sizing-md);
+    width: fit-content;
+}
+
+#message-list > .message-box.own-message {
+    background-color: var(--primary);
+    border-radius: 10px 10px 0 10px;
+    align-self: last baseline
+}
+
+#message-list > .message-box.partner-message {
+    background-color: var(--surface-background);
+    border-radius: 10px 10px 10px 0;
+}
+
+.hidden {
+    display: none!important;
 }
 
 @font-face {
