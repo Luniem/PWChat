@@ -84,7 +84,11 @@ function selectChat(id) {
 }
 
 function refreshMessageWindow() {
-    console.log("Jup");
+    fetch("http://localhost:5000/conversations/" + selectedChat + "/messages").then((response) => {
+        response.json().then((messages) => {
+            console.log(messages);
+        })
+    })
 }
 
 function activateButton(button) {

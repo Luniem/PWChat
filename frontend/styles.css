@@ -1,7 +1,7 @@
 html, body {
     margin: 0;
-    height: 100vh;
-    width: 100vw;
+    height: 100dvh;
+    width: 100dvw;
     background-color: var(--surface-background);
     display: flex;
     flex-direction: column;
@@ -47,6 +47,7 @@ main {
     flex-direction: column;
     padding: var(--sizing-md);
     gap: 10px;
+    /* box-shadow: 10px 0 5px -5px rgba(25,25,25,0.3); */
 }
 
 #conversation-area > .header > * {
@@ -99,7 +100,6 @@ main {
     display: flex;
     width: 100%;
     height: 100%;
-    background-color: var(--surface-card);
 }
 
 #message-area > #no-convo-selected {
@@ -119,7 +119,11 @@ i {
     font-size: 24px;
 }
 
-.active i {
+i.small {
+    font-size: 18px;
+}
+
+.active i{
     color: var(--primary);
 }
 
@@ -158,6 +162,77 @@ button.active {
 
 .full-width {
     width: 100%;
+}
+
+#message-area > #selected-convo-area {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+
+#message-area > #selected-convo-area > .convo-header {
+    height: 85px;
+    display: flex;
+    gap: var(--sizing-md);
+    width: 100%;
+    align-items: center;
+    padding: var(--sizing-md);
+    box-sizing: border-box;
+}
+
+#message-area > #selected-convo-area > #message-list {
+    height: 100%;
+}
+
+#message-area > #selected-convo-area > .convo-header > img {
+    height: 100%;
+    border-radius: 50%;
+}
+
+#message-area > #selected-convo-area > .message-content {
+    background-color: var(--surface-card);
+    height: 100%;
+    border-radius: 10px;
+    margin: 0 var(--sizing-md) var(--sizing-md) 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--sizing-md);
+}
+
+#message-area > #selected-convo-area > .message-content > .convo-footer {
+    width: 100%;
+    padding: var(--sizing-md) var(--sizing-md);
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.convo-footer > input {
+    width: 100%;
+    height: 50px;
+    background-color: transparent;
+    border: 1px solid var(--primary);
+    border-radius: 10px;
+    color: white;
+    font-size: 16px;
+    padding-left: var(--sizing-md);
+    box-sizing: border-box;
+}
+
+.convo-footer > input:focus {
+    outline: 2px solid var(--primary);
+}
+
+.convo-footer > button {
+    aspect-ratio: 1/1;
+    height: 100%;
+    background-color: var(--primary);
+    border-radius: 10px;
+    color: white;
 }
 
 @font-face {
