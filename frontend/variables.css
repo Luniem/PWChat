@@ -1,9 +1,10 @@
 html {
-    --nav-width: 150px;
-    --nav-reduced-width: 50px;
+    --primary: #508DF8;
+    --nav-width: 75px;
     --sizing-sm: 6px;
     --sizing-md: 12px;
-    --surface-background: #2D2D2D;
+    --surface-background: #2A2B36;
+    --surface-card: #3f404b;
     --on-background: rgba(255,255,255,0.7);
     --on-background-active: rgba(255,255,255,0.95);
 }
