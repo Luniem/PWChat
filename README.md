@@ -45,3 +45,5 @@ The backend-project also features a postman-collection which can be imported to 
 To start the backend following command can be executed:
 
 `npm start`
+
+Submission Date: 10. Nov
