@@ -1,4 +1,189 @@
-html, body {
+/* Globals */
+html,
+body {
     margin: 0;
+    height: 100dvh;
+    width: 100dvw;
+    background-color: var(--background);
+
+    --header-background: #202c33;
+    --no-chat-background: #222e35;
+    --background: #111b21;
+    --text-color-light: #fff;
+    --primary-color: #00c896;
+    --primary-color-action: #04926f;
+    --error: #ff3d00;
+    --padding-md: 12px;
+    --padding-lg: 24px;
+    --border-radius: 4px;
 }
 
+* {
+    font-family: 'Courier New', Courier, monospace;
+    box-sizing: border-box;
+}
+
+/* Class styling */
+
+.f-row {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.f-row > *,
+.f-column > * {
+    width: 100%;
+}
+
+.f-column {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.f-align-center {
+    align-items: center;
+}
+
+.f-justify-space-between {
+    justify-content: space-between;
+}
+
+.f-justify-center {
+    justify-content: center;
+}
+
+.padding-md {
+    padding: var(--padding-md);
+}
+
+.padding-lg {
+    padding: var(--padding-lg);
+}
+
+.text-align-center {
+    text-align: center;
+}
+
+.text-align-right {
+    text-align: right;
+}
+
+.online {
+    color: var(--primary-color);
+}
+
+.offline {
+    color: var(--error);
+}
+
+.scrollable {
+    overflow-y: auto;
+}
+
+.light {
+    color: var(--text-color-light);
+}
+
+.convo-box {
+    padding: var(--padding-md);
+    height: 75px;
+    gap: 15px;
+}
+
+.convo-box:hover {
+    background-color: rgba(200, 200, 200, 0.1);
+    cursor: pointer;
+}
+
+.convo-box > img {
+    height: 100%;
+    width: auto;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+}
+
+.convo-box > div {
+    width: 100%;
+    overflow: hidden;
+    gap: 8px;
+}
+
+.convo-box > div > span {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.convo-box > span {
+    width: auto;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.convo-box > div > .last-message {
+    opacity: 0.5;
+}
+
+.ghost {
+    opacity: 0.5;
+}
+
+/* Tag styling */
+
+button {
+    padding: var(--padding-md);
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: var(--border-radius);
+}
+
+button:hover {
+    background-color: var(--primary-color-action);
+}
+
+/* ID Styling */
+
+#header,
+#footer {
+    background-color: var(--header-background);
+    color: var(--text-color-light);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#content,
+#conversations,
+#chat {
+    height: 100%;
+}
+
+#content {
+    overflow-y: auto;
+}
+
+#conversations {
+    width: 35%;
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+#conversations > div {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+#chat {
+    display: none;
+    background-image: url('/images/chat-background.jpg');
+    background-size: contain;
+}
+
+#no-chat-selected {
+    width: auto;
+    background-color: var(--no-chat-background);
+    color: var(--text-color-light);
+    border-radius: var(--border-radius);
+}

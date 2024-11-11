@@ -3,30 +3,26 @@ let onlineStatusLabel;
 
 // catch pwa-install event
 let deferredPrompt;
-window.addEventListener("beforeinstallprompt", (e) => {
+window.addEventListener('beforeinstallprompt', (e) => {
     e.preventDefault();
     deferredPrompt = e;
-    installerButton.removeAttribute("hidden");
+    installerButton.removeAttribute('hidden');
 });
 
 async function installApp() {
     if (deferredPrompt) {
         deferredPrompt.prompt();
         deferredPrompt = null;
-        installerButton.setAttribute("hidden", "");
+        installerButton.setAttribute('hidden', '');
     }
 }
 
-window.addEventListener("online", (event) =>
-    updateOnlineStatus(event.type === "online")
-);
-window.addEventListener("offline", (event) =>
-    updateOnlineStatus(event.type === "online")
-);
+window.addEventListener('online', (event) => updateOnlineStatus(event.type === 'online'));
+window.addEventListener('offline', (event) => updateOnlineStatus(event.type === 'online'));
 
-document.addEventListener("DOMContentLoaded", () => {
-    if ("serviceWorker" in navigator) {
-        navigator.serviceWorker.register("/sw.js");
+document.addEventListener('DOMContentLoaded', () => {
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/sw.js');
     }
 
     // initialize all DOM-variables
@@ -36,11 +32,15 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function intializeDOMElements() {
-    installerButton = document.getElementById("installButton");
-    onlineStatusLabel = document.getElementById("onlineStatus");
+    installerButton = document.getElementById('installButton');
+    onlineStatusLabel = document.getElementById('onlineStatus');
 }
 
 function updateOnlineStatus(isOnline) {
-    onlineStatusLabel.innerText = isOnline ? "Online" : "Offline";
-    //TODO: Different color?
+    onlineStatusLabel.innerText = isOnline ? 'Online' : 'Offline';
+
+    const toRemove = isOnline ? 'offline' : 'online';
+    const toAdd = isOnline ? 'online' : 'offline';
+    onlineStatusLabel.classList.remove(toRemove);
+    onlineStatusLabel.classList.add(toAdd);
 }

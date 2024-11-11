@@ -3,15 +3,80 @@
     <head>
         <title>Textlify</title>
         <link rel="stylesheet" href="styles.css" />
+        <link rel="stylesheet" href="scrollbar.css" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="manifest" href="manifest.json" />
         <script src="main.js"></script>
     </head>
-    <body>
-        <div class="header">
-            <h1>Textly</h1>
-            <span id="onlineStatus"></span>
+    <body class="f-column">
+        <!-- HEADER -->
+        <div id="header" class="f-row f-align-center f-justify-space-between padding-md">
+            <div>
+                <button id="installButton" onclick="installApp()" hidden>Install PWA</button>
+            </div>
+            <h1 class="text-align-center">Textly</h1>
+            <span id="onlineStatus" class="text-align-right"></span>
         </div>
-        <button id="installButton" onclick="installApp()" hidden>Install PWA</button>
+
+        <!-- CONTENT -->
+        <div id="content" class="f-row">
+            <div id="conversations" class="f-column f-align-center scrollable">
+                <div class="convo-box f-row light">
+                    <img class="avatar" src="https://xsgames.co/randomusers/avatar.php?g=male" />
+                    <div class="f-column f-justify-center">
+                        <div class="f-row">
+                            <span class="bold">Test</span>
+                            <span class="ghost text-align-right">11.10.2000</span>
+                        </div>
+                        <span class="ghost"
+                            >Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati
+                            porro asperiores quo voluptate. Non voluptatem debitis rem porro ab
+                            consequuntur nulla id, vel at eius vero voluptate, fuga sint
+                            temporibus?</span
+                        >
+                    </div>
+                </div>
+                <div class="convo-box f-row light">
+                    <img class="avatar" src="https://xsgames.co/randomusers/avatar.php?g=male" />
+                    <div class="f-column f-justify-center">
+                        <div class="f-row">
+                            <span class="bold">Test</span>
+                            <span class="ghost text-align-right">11.10.2000</span>
+                        </div>
+                        <span class="ghost"
+                            >Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati
+                            porro asperiores quo voluptate. Non voluptatem debitis rem porro ab
+                            consequuntur nulla id, vel at eius vero voluptate, fuga sint
+                            temporibus?</span
+                        >
+                    </div>
+                </div>
+            </div>
+
+            <!-- no chat -->
+            <div
+                id="no-chat"
+                class="f-column f-align-center f-justify-center padding-md scrollable"
+            >
+                <div
+                    id="no-chat-selected"
+                    class="f-column f-align-center f-justify-center padding-lg"
+                >
+                    <span>No chat selected</span>
+                </div>
+            </div>
+
+            <!-- chat selected -->
+            <div
+                id="chat"
+                class="f-column f-align-center f-justify-center padding-md scrollable"
+            ></div>
+        </div>
+
+        <!-- FOOTER -->
+        <div id="footer" class="f-row f-align-center f-justify-space-between padding-lg">
+            <span>Loading...</span>
+            <span class="text-align-right">Loading...</span>
+        </div>
     </body>
 </html>
