@@ -1,5 +1,9 @@
 let installerButton;
 let onlineStatusLabel;
+let conversationList;
+let convoBoxTemplate;
+
+const LAST_SELECTED_CONVERSATION_KEY = 'lastSelectedConversation';
 
 // catch pwa-install event
 let deferredPrompt;
@@ -29,11 +33,41 @@ document.addEventListener('DOMContentLoaded', () => {
     intializeDOMElements();
 
     updateOnlineStatus(navigator.onLine);
+
+    fetch('/users').then((response) => {
+        response.json().then((users) => {
+            users.forEach((user) => {
+                clonedConvoBoxed = convoBoxTemplate.content.cloneNode(true);
+                clonedConvoBoxed.querySelector('[data-image]').src = user.image;
+                clonedConvoBoxed.querySelector('[data-username]').innerText = user.username;
+                clonedConvoBoxed.querySelector('[data-fullname]').innerText = user.fullname;
+
+                // put a click-event on the div
+                clonedConvoBoxed.querySelector('div').addEventListener('click', () => {
+                    selectConversation(user);
+                });
+
+                // TODO: merge this with convos and show last message
+                conversationList.appendChild(clonedConvoBoxed);
+            });
+
+            navigator
+                .setAppBadge(users.length)
+                .then(() => {
+                    console.log('Badge set');
+                })
+                .catch((error) => {
+                    console.error('Badge error', error);
+                });
+        });
+    });
 });
 
 function intializeDOMElements() {
     installerButton = document.getElementById('installButton');
     onlineStatusLabel = document.getElementById('onlineStatus');
+    convoBoxTemplate = document.getElementById('convo-box-template');
+    conversationList = document.getElementById('conversations');
 }
 
 function updateOnlineStatus(isOnline) {
@@ -43,4 +77,8 @@ function updateOnlineStatus(isOnline) {
     const toAdd = isOnline ? 'online' : 'offline';
     onlineStatusLabel.classList.remove(toRemove);
     onlineStatusLabel.classList.add(toAdd);
+}
+
+function selectConversation(user) {
+    localStorage.setItem(LAST_SELECTED_CONVERSATION_KEY, JSON.stringify(user.username));
 }

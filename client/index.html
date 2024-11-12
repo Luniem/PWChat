@@ -20,38 +20,7 @@
 
         <!-- CONTENT -->
         <div id="content" class="f-row">
-            <div id="conversations" class="f-column f-align-center scrollable">
-                <div class="convo-box f-row light">
-                    <img class="avatar" src="https://xsgames.co/randomusers/avatar.php?g=male" />
-                    <div class="f-column f-justify-center">
-                        <div class="f-row">
-                            <span class="bold">Test</span>
-                            <span class="ghost text-align-right">11.10.2000</span>
-                        </div>
-                        <span class="ghost"
-                            >Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati
-                            porro asperiores quo voluptate. Non voluptatem debitis rem porro ab
-                            consequuntur nulla id, vel at eius vero voluptate, fuga sint
-                            temporibus?</span
-                        >
-                    </div>
-                </div>
-                <div class="convo-box f-row light">
-                    <img class="avatar" src="https://xsgames.co/randomusers/avatar.php?g=male" />
-                    <div class="f-column f-justify-center">
-                        <div class="f-row">
-                            <span class="bold">Test</span>
-                            <span class="ghost text-align-right">11.10.2000</span>
-                        </div>
-                        <span class="ghost"
-                            >Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati
-                            porro asperiores quo voluptate. Non voluptatem debitis rem porro ab
-                            consequuntur nulla id, vel at eius vero voluptate, fuga sint
-                            temporibus?</span
-                        >
-                    </div>
-                </div>
-            </div>
+            <div id="conversations" class="f-column f-align-center scrollable"></div>
 
             <!-- no chat -->
             <div
@@ -79,4 +48,15 @@
             <span class="text-align-right">Loading...</span>
         </div>
     </body>
+
+    <!-- TEMPLATES -->
+    <template id="convo-box-template">
+        <div class="convo-box f-row light">
+            <img class="avatar" alt="Profile-Image" data-image />
+            <div class="f-column f-justify-center">
+                <span class="bold" data-fullname></span>
+                <span class="ghost" data-username></span>
+            </div>
+        </div>
+    </template>
 </html>

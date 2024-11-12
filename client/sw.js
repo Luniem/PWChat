@@ -15,6 +15,7 @@ const CACHED_ASSETS = [
     '/',
     '/main.js',
     '/styles.css',
+    '/scrollbar.css',
     '/favicon.ico',
     '/manifest.json',
     '/icons/android-chrome-192x192.png',
@@ -75,8 +76,13 @@ async function clearOldCaches() {
     );
 }
 
+/**
+ *  Get the desired request from cache first. If the request is not in the the cache, fetch it and store it in the cache.
+ * @param {*} request the initial network-request
+ * @returns a Promise that resolves with the response from the cache first or else the network
+ */
 async function cacheFirstOrStore(request) {
-    const cache = await caches.open('pwa2-v1');
+    const cache = await caches.open(CHAT_CACHE_KEY);
     const cachedResponse = await cache.match(request);
 
     if (cachedResponse) {
@@ -88,4 +94,18 @@ async function cacheFirstOrStore(request) {
     const response = await fetch(request);
     cache.put(request, response.clone());
     return response;
+}
+
+async function networkFirstOrIndexedDB(request) {
+    return fetch(event.request)
+        .then((response) => response.json())
+        .then((users) => {
+            // TODO: save resource in indexedDB
+            // users.forEach((user) => writeUserToDB(user));
+            return users;
+        })
+        .catch((error) => {
+            //TODO: go to indexedDB and read out resource
+            throw Error('No users found');
+        });
 }
