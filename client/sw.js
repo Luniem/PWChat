@@ -25,7 +25,9 @@ const CACHED_ASSETS = [
     '/icons/android-chrome-512x512.png',
     '/screenshots/example-wide.jpg',
     '/screenshots/example-narrow.png',
-    '/icons/trash-can-128x128.png'
+    '/icons/trash-can-128x128.png',
+    '/dedicated-worker.js',
+    '/shared-worker.js',
 ];
 
 sw.addEventListener('install', (installEvent) => {
