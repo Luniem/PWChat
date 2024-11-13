@@ -26,6 +26,7 @@ const CACHED_ASSETS = [
     '/screenshots/example-wide.jpg',
     '/screenshots/example-narrow.png',
     '/icons/trash-can-128x128.png',
+    '/images/chat-background.jpg',
     '/dedicated-worker.js',
     '/shared-worker.js',
 ];

@@ -1,7 +1,7 @@
 {
     "name": "Textly",
     "short_name": "Textly",
-    "description": "This is my first PWA with App Shell and installer that works offline :-)",
+    "description": "Install Textly to chat with your friends",
     "theme_color": "#181818",
     "background_color": "#181818",
     "display": "standalone",
@@ -21,14 +21,14 @@
     "screenshots": [
         {
             "src": "screenshots/example-wide.jpg",
-            "sizes": "3500x2333",
+            "sizes": "1920x1080",
             "type": "image/jpg",
             "form_factor": "wide",
             "label": "Desktop Shell"
         },
         {
             "src": "screenshots/example-narrow.png",
-            "sizes": "1345x2400",
+            "sizes": "460x760",
             "type": "image/png",
             "form_factor": "narrow",
             "label": "Mobile Shell"
