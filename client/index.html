@@ -38,14 +38,30 @@
             <!-- chat selected -->
             <div
                 id="chat"
-                class="f-column f-align-center f-justify-center padding-md scrollable"
-            ></div>
+                class="f-column f-align-center scrollable hidden"
+            >
+                <div id="selected-chat-header" class="f-row f-align-center f-justify-space-between padding-sm">
+                    <img id="selected-chat-image" class="avatar"/>
+                    <div class="f-column gap">
+                        <span id="selected-chat-name" class="light bold"></span>
+                        <span id="selected-chat-username" class="light ghost"></span>
+                    </div>
+                </div>
+                <div id="message-list" class="f-column padding-md scrollable gap">
+
+                </div>
+
+                <div id="message-input-box" class="f-row padding-md gap">
+                    <input id="message-input" class="light" type="text" placeholder="Type a message..." />
+                    <button id="send-button" onclick="sendMessage()">Send</button>
+                </div>
+            </div>
         </div>
 
         <!-- FOOTER -->
         <div id="footer" class="f-row f-align-center f-justify-space-between padding-lg">
-            <span>Loading...</span>
-            <span class="text-align-right">Loading...</span>
+            <span id="time-running">Loading...</span>
+            <span id="current-time" class="text-align-right">Loading...</span>
         </div>
     </body>
 
@@ -53,10 +69,17 @@
     <template id="convo-box-template">
         <div class="convo-box f-row light">
             <img class="avatar" alt="Profile-Image" data-image />
-            <div class="f-column f-justify-center">
+            <div class="f-column f-justify-center gap">
                 <span class="bold" data-fullname></span>
                 <span class="ghost" data-username></span>
             </div>
         </div>
     </template>
+
+    <template id="message-template">
+        <div class="message padding-sm">
+            <span class="light"></span>
+        </div>
+    </template>
+
 </html>

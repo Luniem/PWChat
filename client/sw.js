@@ -6,6 +6,9 @@
 /**@type {ServiceWorkerGlobalScope} sw */
 const sw = self;
 
+const INDEXED_DB_NAME = 'CHAT_DB';
+const INDEXED_DB_VERSION = 1;
+
 const CHAT_CACHE_NAME = 'chat-cache';
 const CHAT_CACHE_VERSION = 'v1';
 const CHAT_CACHE_KEY = `${CHAT_CACHE_NAME}-${CHAT_CACHE_VERSION}`;
@@ -22,6 +25,7 @@ const CACHED_ASSETS = [
     '/icons/android-chrome-512x512.png',
     '/screenshots/example-wide.jpg',
     '/screenshots/example-narrow.png',
+    '/icons/trash-can-128x128.png'
 ];
 
 sw.addEventListener('install', (installEvent) => {
@@ -48,13 +52,21 @@ self.addEventListener('fetch', (event) => {
     const path = new URL(event.request.url).pathname;
     if (CACHED_ASSETS.includes(path)) {
         event.respondWith(
-            caches.open(CHAT_CACHE_KEY).then(async (cache) => cache.match(event.request))
+            caches.open(CHAT_CACHE_KEY).then(async (cache) => {
+                const test  = await cache.match(path)
+                return test
+            })
+            
         );
     }
 
     // images - try cache or cache them
     if (path.includes('images')) {
         event.respondWith(cacheFirstOrStore(event.request));
+    }
+
+    if (path.includes('users') || path.includes('conversations')) {
+        event.respondWith(networkFirstOrIndexedDB(event.request));
     }
 });
 
@@ -69,6 +81,7 @@ async function clearOldCaches() {
     return Promise.all(
         // create a promise for deletion of every key
         keys.map((key) => {
+            // delete old app-shell-caches, explicitely not other caches
             if (key.startsWith(CHAT_CACHE_NAME) && key !== CHAT_CACHE_KEY) {
                 return caches.delete(key);
             }
@@ -85,7 +98,7 @@ async function cacheFirstOrStore(request) {
     const cache = await caches.open(CHAT_CACHE_KEY);
     const cachedResponse = await cache.match(request);
 
-    if (cachedResponse) {
+    if (cachedResponse !== undefined) {
         // cache hit
         return cachedResponse;
     }
@@ -96,16 +109,68 @@ async function cacheFirstOrStore(request) {
     return response;
 }
 
-async function networkFirstOrIndexedDB(request) {
-    return fetch(event.request)
-        .then((response) => response.json())
-        .then((users) => {
-            // TODO: save resource in indexedDB
-            // users.forEach((user) => writeUserToDB(user));
-            return users;
+function networkFirstOrIndexedDB(request) {
+    return fetch(request)
+        .then((response) => {
+            // clone to be able to return it later
+            const clonedResponse = response.clone();
+
+            // read out resource
+            return response.json().then((resource) => {
+                // save in indexeddb
+                // note on this one since it seems a little unorthodox
+                // i just save the response of each fetch in this indexedDB no matter if users, convos or messages in convos are accessed
+                // we never really want to filter single users, convos or messages out of this indexedDB
+
+                //alternatively we could also create a better structured table (objectstore) for each of the entities but that would require more code
+                saveToIndexedDB(request.url, resource);
+                
+                // return original response
+                return clonedResponse;
+            });
         })
-        .catch((error) => {
-            //TODO: go to indexedDB and read out resource
-            throw Error('No users found');
+        .catch(() => {
+            return getFromIndexedDB(request.url);
         });
+}
+
+
+function saveToIndexedDB(url, data) {
+    const dbRequest = indexedDB.open(INDEXED_DB_NAME, INDEXED_DB_VERSION);
+    
+    dbRequest.onupgradeneeded = function(event) {
+        const db = event.target.result;
+        db.createObjectStore('resources', { keyPath: 'url' });
+    }
+
+    dbRequest.onsuccess = function(event) {
+        const db = event.target.result;
+        const transaction = db.transaction('resources', 'readwrite');
+        const store = transaction.objectStore('resources');
+        store.put({ url: url, data: data });
+    };
+
+    dbRequest.onerror = function(event) {
+        console.error('IndexedDB error:', event.target.error);
+    };
+}
+
+function getFromIndexedDB(url) {
+    return new Promise((resolve, reject) => {
+        const dbRequest = indexedDB.open(INDEXED_DB_NAME, INDEXED_DB_VERSION);
+        
+        dbRequest.onsuccess = function(event) {
+            const db = event.target.result;
+            const transaction = db.transaction('resources', 'readonly');
+            const store = transaction.objectStore('resources');
+            const request = store.get(url);
+            request.onsuccess = function() {
+                resolve(new Response(JSON.stringify(request.result.data)));
+            };
+        };
+    
+        dbRequest.onerror = function(event) {
+            reject('IndexedDB error:', event.target.error)
+        };
+    });
 }

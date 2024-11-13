@@ -2,6 +2,10 @@
     "name": "Textly",
     "short_name": "Textly",
     "description": "This is my first PWA with App Shell and installer that works offline :-)",
+    "theme_color": "#181818",
+    "background_color": "#181818",
+    "display": "standalone",
+    "start_url": "/index.html",
     "icons": [
         {
             "src": "icons/android-chrome-192x192.png",
@@ -14,10 +18,6 @@
             "type": "image/png"
         }
     ],
-    "theme_color": "#181818",
-    "background_color": "#181818",
-    "display": "standalone",
-    "start_url": "/index.html",
     "screenshots": [
         {
             "src": "screenshots/example-wide.jpg",
@@ -33,5 +33,20 @@
             "form_factor": "narrow",
             "label": "Mobile Shell"
         }
+    ],
+    "shortcuts": [
+        {
+            "name": "Reset opened chat",
+            "short_name": "Reset chat",
+            "description": "Reset the last opened chat",
+            "url": "/index.html?action=reset-last-chat",
+            "icons": [
+                {
+                    "src": "icons/trash-can-128x128.png",
+                    "sizes": "128x128",
+                    "type": "image/png"
+                }
+            ]
+          }
     ]
 }
