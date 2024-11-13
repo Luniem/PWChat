@@ -42,6 +42,15 @@ async function installApp() {
 window.addEventListener('online', (event) => updateOnlineStatus(event.type === 'online'));
 window.addEventListener('offline', (event) => updateOnlineStatus(event.type === 'online'));
 
+// subscribe to SSE
+const eventSource = new EventSource('/messageEvent');
+eventSource.addEventListener('newMessageCount', (event) => {
+    const newMessageCount = parseInt(event.data);
+    if (!isNaN(newMessageCount) && navigator.setAppBadge) {
+        navigator.setAppBadge(newMessageCount);
+    }
+});
+
 document.addEventListener('DOMContentLoaded', () => {
     // initialize all DOM-variables
     intializeDOMElements();
