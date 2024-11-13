@@ -83,6 +83,13 @@ document.addEventListener('DOMContentLoaded', () => {
         response.json().then((users) => {
             allUsers = users;
 
+            // define current selected user
+            currentUser = localStorage.getItem(CURRENT_USER_KEY);
+            if (!currentUser) {
+                currentUser = users[0].username;
+                localStorage.setItem(CURRENT_USER_KEY, currentUser);
+            }
+
             // check if there is a last selected conversation
             const lastSelectedConversation = localStorage.getItem(LAST_SELECTED_CONVERSATION_KEY);
             if (lastSelectedConversation) {
@@ -91,13 +98,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (user) {
                     openChat(user, convoId);
                 }
-            }
-
-            // define current selected user
-            currentUser = localStorage.getItem(CURRENT_USER_KEY);
-            if (!currentUser) {
-                currentUser = users[0].username;
-                localStorage.setItem(CURRENT_USER_KEY, currentUser);
             }
         }).then(() => {
             // fetch all conversations
